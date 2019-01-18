@@ -1,0 +1,16 @@
+.button {
+    -fx-font-weight: bold;
+}
+.white-prompt {
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}
+
+.rating > .container > .button {
+  -fx-background-image: url("../media/star1.png");
+  -fx-background-repeat: no-repeat;
+}
+.rating > .container > .button.strong {
+  -fx-background-image: url("../media/star3.png");
+  -fx-background-repeat: no-repeat;
+}

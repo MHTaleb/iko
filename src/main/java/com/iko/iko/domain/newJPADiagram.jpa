@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="com.iko.iko.domain" v="4.2.4" rws="_15473167455092" Pws="_15473167455092" cws="_15473167455092" sm="false" xs="false" id="_15473167455081" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="UserPK" abs="false" class="User" v="true" jbn="false" xre="false" m="false" rootElement="_15473167455081" id="_1547316759852">
+        <jpa:ath>win 10</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="username" id="_15473167702845">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="password" id="_15473167751556">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_15473167599123">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="User.findAll">
+            <jpa:query>Select e from User e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByUsername">
+            <jpa:query>Select u from User u where u.username=:username</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="User.findByPassword">
+            <jpa:query>Select u from User u where u.password=:password</jpa:query>
+        </jpa:nq>
+        <jpa:table name="iko_user"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="MoviePK" abs="false" class="Movie" v="true" jbn="false" xre="false" m="false" rootElement="_15473167455081" id="_1547316792286">
+        <jpa:ath>win 10</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="title" id="_15473168046199">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="com.iko.iko.domain.MovieType" v="true" xvt="" name="type" id="_154731680809810">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="detail" id="_154767707303410">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.List" connected-entity-id="_1547316817907" v="true" xvt="" name="notes" id="_154731683761413">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-many>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_15473167922887">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Movie.findAll">
+            <jpa:query>Select e from Movie e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Movie.findByTitle">
+            <jpa:query>Select m from Movie m where m.title=:title</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Movie.findByType">
+            <jpa:query>Select m from Movie m where m.type=:type</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Movie.findByDetail">
+            <jpa:query>Select m from Movie m where m.detail=:detail</jpa:query>
+        </jpa:nq>
+        <jpa:table name="iko_movie"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="NotePK" abs="false" class="Note" v="true" jbn="false" xre="false" m="false" rootElement="_15473167455081" id="_1547316817907">
+        <jpa:ath>win 10</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="Double" v="true" xvt="" name="valeur" id="_15476768107519">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547316759852" v="true" xvt="" name="user" id="_154731687087114">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_154731681790911">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Note.findAll">
+            <jpa:query>Select e from Note e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Note.findByValeur">
+            <jpa:query>Select n from Note n where n.valeur=:valeur</jpa:query>
+        </jpa:nq>
+        <jpa:table name="iko_note"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="FavoryPK" abs="false" class="Favory" v="true" jbn="false" xre="false" m="false" rootElement="_15473167455081" id="_1547317416052">
+        <jpa:ath>win 10</jpa:ath>
+        <jpa:attributes>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.List" connected-entity-id="_1547316792286" v="true" xvt="" name="movies" id="_154731751714019">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-many>
+            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547316759852" v="true" xvt="" name="user" id="_154731750286318">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_154731741605415">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Favory.findAll">
+            <jpa:query>Select e from Favory e</jpa:query>
+        </jpa:nq>
+        <jpa:table name="iko_favory"/>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_15473167455092">
+            <i ref="_1547316792286" x="158" y="338"/>
+            <i ref="_1547317416052" x="190" y="151"/>
+            <i ref="_1547316817907" x="483" y="338"/>
+            <i ref="_1547316759852" x="410" y="85"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane id="AnchorPane" prefHeight="419.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iko.iko.FXMLController">
+     <children>
+      <VBox layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: #0d3b66;">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXToggleButton onAction="#menuEvent" text="Menu" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXToggleButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="238.0" text="I-Streaming" textAlignment="CENTER" textFill="WHITE" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Courier New" size="34.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../media/icons8_HDTV_32px_1.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets right="17.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="300.0" prefWidth="600.0" style="-fx-background-color: #faf0ca;" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="361.0" prefWidth="110.0" spacing="13.0" style="-fx-background-color: #006666;">
+                     <children>
+                        <JFXButton onAction="#movieFilterEvent" text="Action" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#movieFilterEvent" text="Comedy" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#movieFilterEvent" text="Aventure" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#movieFilterEvent" text="Romance" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#movieFilterEvent" text="Thriller" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#movieFilterEvent" text="Favoris" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <JFXButton onAction="#advancedSearch" prefHeight="48.0" prefWidth="100.0" text="Recherche Avancer" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox spacing="5.0">
+                           <children>
+                              <JFXTextField fx:id="searchField" prefHeight="25.0" prefWidth="330.0" promptText="Titre" HBox.hgrow="ALWAYS" />
+                              <JFXButton onAction="#searchEvent" text="Rechercher" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" spacing="50.0">
+                           <children>
+                              <VBox fx:id="movie1Panel" alignment="TOP_CENTER" prefHeight="198.0" prefWidth="143.0" spacing="5.0" style="-fx-border-color: #3335;">
+                                 <children>
+                                    <Label fx:id="movie1Title" text="Titre" />
+                                    <ImageView fx:id="movie1Image" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #3331;" />
+                                    <JFXCheckBox fx:id="movie1Favori" text="favori" />
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Rating maxHeight="32.0" maxWidth="159.0" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="7.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="movie2Panel" alignment="TOP_CENTER" prefHeight="198.0" prefWidth="143.0" spacing="5.0" style="-fx-border-color: #3335;">
+                                 <children>
+                                    <Label fx:id="movie2Title" text="Titre" />
+                                    <ImageView fx:id="movie2Image" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
+                                    <JFXCheckBox fx:id="movie2Favori" text="favori" />
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Rating maxHeight="32.0" maxWidth="159.0" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="7.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox fx:id="movie3Panel" alignment="TOP_CENTER" prefHeight="198.0" prefWidth="143.0" spacing="5.0" style="-fx-border-color: #3335;">
+                                 <children>
+                                    <Label fx:id="movie3Title" text="Titre" />
+                                    <ImageView fx:id="movie3Image" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
+                                    <JFXCheckBox fx:id="movie3Favori" text="favori" />
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Rating maxHeight="32.0" maxWidth="159.0" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="7.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="2.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="603.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <JFXButton onAction="#showPrevious" text="Précedent" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_RIGHT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <JFXButton onAction="#showNext" text="Suivant" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="20.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
