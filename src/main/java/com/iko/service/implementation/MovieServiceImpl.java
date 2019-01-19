@@ -9,6 +9,7 @@ import com.iko.iko.EntityManagerConfig;
 import com.iko.iko.domain.Movie;
 import com.iko.iko.domain.MovieType;
 import com.iko.iko.repository.MovieJpaController;
+import com.iko.service.FavoryService;
 import com.iko.service.MovieService;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.function.Predicate;
 public class MovieServiceImpl implements MovieService {
 
     MovieJpaController mjc = new MovieJpaController(EntityManagerConfig.getEmf());
-
+    FavoryService favoryService = new FavoryServiceImpl();
+    
     @Override
     public List<Movie> getAllMovies() {
 
@@ -51,6 +53,7 @@ public class MovieServiceImpl implements MovieService {
             case "horreur":
                 type = MovieType.HOROR;
                 break;
+            case "favoris" : return favoryService.gteAllFavory();
             default: return mjc.findMovieEntities();
         }
         

@@ -3,9 +3,11 @@ package com.iko.iko;
 import com.iko.iko.domain.Movie;
 import com.iko.iko.domain.Note;
 import com.iko.iko.domain.User;
+import com.iko.service.FavoryService;
 import com.iko.service.MovieNoteService;
 import com.iko.service.MovieService;
 import com.iko.service.implementation.ConnectionServiceImpl;
+import com.iko.service.implementation.FavoryServiceImpl;
 import com.iko.service.implementation.MovieNoteServiceImpl;
 import com.iko.service.implementation.MovieServiceImpl;
 import com.jfoenix.controls.JFXButton;
@@ -178,6 +180,33 @@ public class FXMLController implements Initializable {
         }
     }
 
+    @FXML
+    private void movie1favoryEvent(ActionEvent event) {
+        if (movie1Favori.isSelected()) {
+            favoryService.setFavory(movies.get(Movie1Index).getId());
+        }else{
+            favoryService.removeFavory(movies.get(Movie1Index).getId());
+        }
+    }
+
+    @FXML
+    private void movie2favoryEvent(ActionEvent event) {
+        if (movie2Favori.isSelected()) {
+            favoryService.setFavory(movies.get(Movie2Index).getId());
+        }else{
+            favoryService.removeFavory(movies.get(Movie2Index).getId());
+        }
+    }
+
+    @FXML
+    private void movie3favoryEvent(ActionEvent event) {
+        if (movie3Favori.isSelected()) {
+            favoryService.setFavory(movies.get(Movie3Index).getId());
+        }else{
+            favoryService.removeFavory(movies.get(Movie3Index).getId());
+        }
+    }
+
     private void fetchInitialData() {
 
         getData();
@@ -218,6 +247,8 @@ public class FXMLController implements Initializable {
                     movie1Note.setRating(0);
 
                 }
+                
+                movie1Favori.setSelected(favoryService.gteAllFavory().contains(movie));
 
             } catch (IndexOutOfBoundsException e) {
                 movie1Panel.setVisible(false);
@@ -241,6 +272,8 @@ public class FXMLController implements Initializable {
                     movie2Note.setRating(0);
 
                 }
+
+                movie2Favori.setSelected(favoryService.gteAllFavory().contains(movie));
             } catch (IndexOutOfBoundsException e) {
                 movie2Panel.setVisible(false);
             }
@@ -262,7 +295,8 @@ public class FXMLController implements Initializable {
                     movie3Note.setRating(0);
 
                 }
-                
+
+                movie3Favori.setSelected(favoryService.gteAllFavory().contains(movie));
             } catch (IndexOutOfBoundsException e) {
                 movie3Panel.setVisible(false);
             }
@@ -281,6 +315,7 @@ public class FXMLController implements Initializable {
 
     private final MovieService movieService = new MovieServiceImpl();
     private final MovieNoteService movieNoteService = new MovieNoteServiceImpl();
+    private final FavoryService favoryService = new FavoryServiceImpl();
     private User currentUser;
 
     int Movie1Index = 0;

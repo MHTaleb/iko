@@ -5,10 +5,11 @@ package com.iko.iko.domain;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,10 +24,10 @@ public class Favory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(targetEntity = User.class)
+    @OneToOne(targetEntity = User.class,fetch = FetchType.EAGER)
     private User user;
 
-    @OneToMany(targetEntity = Movie.class)
+    @ManyToMany(targetEntity = Movie.class ,fetch = FetchType.EAGER)
     private List<Movie> movies;
 
     public Long getId() {

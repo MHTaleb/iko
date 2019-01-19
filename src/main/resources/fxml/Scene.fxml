@@ -124,7 +124,7 @@
                                  <children>
                                     <Label fx:id="movie1Title" text="Titre" />
                                     <ImageView fx:id="movie1Image" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #3331;" />
-                                    <JFXCheckBox fx:id="movie1Favori" text="favori" />
+                                    <JFXCheckBox fx:id="movie1Favori" onAction="#movie1favoryEvent" text="favori" />
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Rating fx:id="movie1Note" maxHeight="32.0" maxWidth="159.0" onMouseClicked="#updateMovie1Note" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
@@ -142,7 +142,7 @@
                                  <children>
                                     <Label fx:id="movie2Title" text="Titre" />
                                     <ImageView fx:id="movie2Image" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
-                                    <JFXCheckBox fx:id="movie2Favori" text="favori" />
+                                    <JFXCheckBox fx:id="movie2Favori" onAction="#movie2favoryEvent" text="favori" />
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Rating fx:id="movie2Note" maxHeight="32.0" maxWidth="159.0" onMouseClicked="#updateMovie2Note" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
@@ -160,7 +160,7 @@
                                  <children>
                                     <Label fx:id="movie3Title" text="Titre" />
                                     <ImageView fx:id="movie3Image" fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" />
-                                    <JFXCheckBox fx:id="movie3Favori" text="favori" />
+                                    <JFXCheckBox fx:id="movie3Favori" onAction="#movie3favoryEvent" text="favori" />
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Rating fx:id="movie3Note" maxHeight="32.0" maxWidth="159.0" onMouseClicked="#updateMovie3Note" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
