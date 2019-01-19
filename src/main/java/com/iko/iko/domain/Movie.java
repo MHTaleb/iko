@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,9 +36,10 @@ public class Movie {
     private MovieType type;
 
     @Basic
+    @Column(length = 2000)
     private String detail;
 
-    @OneToMany(targetEntity = Note.class)
+    @OneToMany(targetEntity = Note.class,fetch = FetchType.EAGER)
     private List<Note> notes;
 
     public Long getId() {

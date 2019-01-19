@@ -117,7 +117,7 @@
                                     <JFXCheckBox fx:id="movie1Favori" text="favori" />
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Rating maxHeight="32.0" maxWidth="159.0" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
+                                          <Rating fx:id="movie1Note" maxHeight="32.0" maxWidth="159.0" onMouseClicked="#updateMovie1Note" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
                                        </children>
                                        <padding>
                                           <Insets left="7.0" top="2.0" />
@@ -135,7 +135,7 @@
                                     <JFXCheckBox fx:id="movie2Favori" text="favori" />
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Rating maxHeight="32.0" maxWidth="159.0" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
+                                          <Rating fx:id="movie2Note" maxHeight="32.0" maxWidth="159.0" onMouseClicked="#updateMovie2Note" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
                                        </children>
                                        <padding>
                                           <Insets left="7.0" top="2.0" />
@@ -153,7 +153,7 @@
                                     <JFXCheckBox fx:id="movie3Favori" text="favori" />
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Rating maxHeight="32.0" maxWidth="159.0" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
+                                          <Rating fx:id="movie3Note" maxHeight="32.0" maxWidth="159.0" onMouseClicked="#updateMovie3Note" prefHeight="32.0" prefWidth="159.0" rating="0.0" />
                                        </children>
                                        <padding>
                                           <Insets left="7.0" top="2.0" />

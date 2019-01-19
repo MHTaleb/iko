@@ -1,17 +1,19 @@
 package com.iko.iko;
 
 import com.iko.iko.domain.Movie;
+import com.iko.iko.domain.Note;
 import com.iko.iko.domain.User;
+import com.iko.service.MovieNoteService;
 import com.iko.service.MovieService;
 import com.iko.service.implementation.ConnectionServiceImpl;
+import com.iko.service.implementation.MovieNoteServiceImpl;
 import com.iko.service.implementation.MovieServiceImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
-import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.Rating;
 
 public class FXMLController implements Initializable {
 
@@ -37,7 +41,7 @@ public class FXMLController implements Initializable {
     @FXML
     private JFXCheckBox movie1Favori;
     @FXML
-    private JFXComboBox<Integer> movie1Note;
+    private Rating movie1Note;
     @FXML
     private VBox movie2Panel;
     @FXML
@@ -47,7 +51,7 @@ public class FXMLController implements Initializable {
     @FXML
     private JFXCheckBox movie2Favori;
     @FXML
-    private JFXComboBox<Integer> movie2Note;
+    private Rating movie2Note;
     @FXML
     private VBox movie3Panel;
     @FXML
@@ -57,7 +61,7 @@ public class FXMLController implements Initializable {
     @FXML
     private JFXCheckBox movie3Favori;
     @FXML
-    private JFXComboBox<Integer> movie3Note;
+    private Rating movie3Note;
     @FXML
     private VBox menu;
 
@@ -90,44 +94,156 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void showPrevious(ActionEvent event) {
+        if (Movie1Index>0) {
+            Movie1Index -=1;
+            Movie2Index -=1;
+            Movie3Index -=1;
+            showMovies(Movie1Index, Movie2Index, Movie3Index);
+        }
     }
 
     @FXML
     private void showNext(ActionEvent event) {
+        if (Movie3Index<movies.size()-1) {
+            Movie3Index+=1;
+            Movie2Index+=1;
+            Movie1Index+=1;
+            showMovies(Movie1Index, Movie2Index, Movie3Index);
+        }
     }
 
     @FXML
     private void advancedSearch(ActionEvent event) {
     }
 
+    @FXML
+    private void updateMovie1Note(MouseEvent event) {
+        try {
+            System.out.println("movie panel 1 index is "+Movie1Index);
+            final double rating = movie1Note.getRating();
+            double updateNote = movieNoteService.updateNote(movies.get(Movie1Index).getId(), rating);
+            movie1Note.setRating(updateNote);
+            getData();
+            System.out.println("event end with note "+updateNote+" current input ratting "+rating);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void updateMovie2Note(MouseEvent event) {
+        try {
+            System.out.println("movie panel 2 index is "+Movie2Index);
+            final double rating = movie2Note.getRating();
+            double updateNote = movieNoteService.updateNote(movies.get(Movie2Index).getId(), rating);
+            movie2Note.setRating(updateNote);
+            System.out.println("event end");
+            getData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void updateMovie3Note(MouseEvent event) {
+        try {
+            System.out.println("movie panel 3 index is "+Movie3Index);
+            final double rating = movie3Note.getRating();
+            double updateNote = movieNoteService.updateNote(movies.get(Movie3Index).getId(), rating);
+            movie3Note.setRating(updateNote);
+            getData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void fetchInitialData() {
-        movies.addAll(movieService.getAllMovies());
 
+        getData();
+
+        showMovies(Movie1Index, Movie2Index, Movie3Index);
+
+    }
+
+    private void getData() {
+        List<Movie> allMovies = movieService.getAllMovies();
+        movies.clear();
+        for (Movie movie : allMovies) {
+            System.out.println(movie);
+            movies.add(movie);
+        }
+    }
+
+    private void showMovies(int Movie1IndexParam, int Movie2IndexParam, int Movie3IndexParam) {
         try {
-            Movie movie = movies.get(0);
-            movie1Image.setImage(new Image("c:/Films/"+ movie.getTitle() + ".jpg"));
+            double somme;
+            int size;
 
-            movie = movies.get(1);
-            movie2Image.setImage(new Image("c:/Films/"+ movie.getTitle() + ".jpg"));
+            somme = 0;
+            size = 0;
+            Movie movie = movies.get(Movie1IndexParam);
+            movie1Title.setText(movie.getTitle());
+            movie1Image.setImage(new Image("file:///C:/Films/" + movie.getTitle() + ".jpg"));
+            if (!movie.getNotes().isEmpty()) {
+                for (Note note : movie.getNotes()) {
+                    somme += note.getValeur();
+                }
+                size = movie.getNotes().size();
+                movie1Note.setRating(somme / size);
+            }else{
+                movie1Note.setRating(0);
+                
+            }
 
-            movie = movies.get(2);
-            movie3Image.setImage(new Image("c:/Films/"+ movie.getTitle() + ".jpg"));
+            somme = 0;
+            size = 0;
+            movie = movies.get(Movie2IndexParam);
+            movie2Title.setText(movie.getTitle());
+            movie2Image.setImage(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+            if (!movie.getNotes().isEmpty()) {
+                for (Note note : movie.getNotes()) {
+                    somme += note.getValeur();
+                }
+                size = movie.getNotes().size();
+                movie2Note.setRating(somme / size);
+            }else{
+                movie2Note.setRating(0);
+                
+            }
+
+            somme = 0;
+            size = 0;
+            movie = movies.get(Movie3IndexParam);
+            movie3Title.setText(movie.getTitle());
+            movie3Image.setImage(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+            if (!movie.getNotes().isEmpty()) {
+                for (Note note : movie.getNotes()) {
+                    somme += note.getValeur();
+                }
+                size = movie.getNotes().size();
+                movie3Note.setRating(somme / size);
+            }else{
+                movie3Note.setRating(0);
+                
+            }
 
         } catch (Exception e) {
             System.out.println(" images not found");
+            e.printStackTrace();
         }
-
     }
 
     private void initObservables() {
-        movies = FXCollections.emptyObservableList();
+        movies = FXCollections.observableArrayList();
     }
-
 
     private ObservableList<Movie> movies;
 
     private final MovieService movieService = new MovieServiceImpl();
+    private final MovieNoteService movieNoteService = new MovieNoteServiceImpl();
     private User currentUser;
+
+    int Movie1Index = 0;
+    int Movie2Index = 1;
+    int Movie3Index = 2;
 }

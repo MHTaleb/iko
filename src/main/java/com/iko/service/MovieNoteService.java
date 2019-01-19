@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.iko.iko.domain;
+package com.iko.service;
 
 /**
  *
  * @author win 10
  */
-public enum MovieType {
-    ACTION,COMEDY,ADVENTUR,ROMANCE,THRILLER, HOROR
+public interface MovieNoteService {
+    public double updateNote(Long movieId,double note);
 }

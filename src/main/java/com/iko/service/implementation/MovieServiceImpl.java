@@ -22,6 +22,7 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getAllMovies() {
 
         List<Movie> movies = mjc.findMovieEntities();
+        System.out.println(movies);
         return movies;
     }
 
