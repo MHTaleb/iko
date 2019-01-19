@@ -87,7 +87,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void menuEvent(ActionEvent event) {
         JFXToggleButton menuButton = (JFXToggleButton) event.getSource();
-        menu.setVisible(menuButton.isSelected());
+        menu.setVisible(!menuButton.isSelected());
         menu.setPrefWidth(-1 * menu.getPrefWidth());
         menu.setMinWidth(-1 * menu.getPrefWidth());
         menu.setMaxWidth(-1 * menu.getPrefWidth());
