@@ -12,6 +12,8 @@ import com.iko.service.implementation.MovieNoteServiceImpl;
 import com.iko.service.implementation.MovieServiceImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
@@ -20,13 +22,18 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.controlsfx.control.Rating;
 
 public class FXMLController implements Initializable {
@@ -66,6 +73,8 @@ public class FXMLController implements Initializable {
     private Rating movie3Note;
     @FXML
     private VBox menu;
+    @FXML
+    private StackPane dialogPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -184,7 +193,7 @@ public class FXMLController implements Initializable {
     private void movie1favoryEvent(ActionEvent event) {
         if (movie1Favori.isSelected()) {
             favoryService.setFavory(movies.get(Movie1Index).getId());
-        }else{
+        } else {
             favoryService.removeFavory(movies.get(Movie1Index).getId());
         }
     }
@@ -193,7 +202,7 @@ public class FXMLController implements Initializable {
     private void movie2favoryEvent(ActionEvent event) {
         if (movie2Favori.isSelected()) {
             favoryService.setFavory(movies.get(Movie2Index).getId());
-        }else{
+        } else {
             favoryService.removeFavory(movies.get(Movie2Index).getId());
         }
     }
@@ -202,9 +211,98 @@ public class FXMLController implements Initializable {
     private void movie3favoryEvent(ActionEvent event) {
         if (movie3Favori.isSelected()) {
             favoryService.setFavory(movies.get(Movie3Index).getId());
-        }else{
+        } else {
             favoryService.removeFavory(movies.get(Movie3Index).getId());
         }
+    }
+
+    @FXML
+    private void movie1ShowDetail(MouseEvent event) {
+        Movie movie = movies.get(Movie1Index);
+        
+        JFXDialogLayout layaout = new JFXDialogLayout();
+        layaout.setHeading(new Text(movie.getTitle()));
+        final ImageView image = new ImageView(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+        image.setFitHeight(220);
+        image.setFitWidth(160);
+        final Text text = new Text(movie.getDetail());
+        text.prefWidth(400);
+        text.maxWidth(400);
+        HBox box = new HBox(image, text);
+        layaout.setBody(box);
+        
+        JFXDialog dialog = new JFXDialog(dialogPane, layaout, JFXDialog.DialogTransition.CENTER);
+        
+        JFXButton close = new JFXButton("Fermer");
+        close.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        
+        layaout.setActions(close);
+        
+        dialog.show();
+    }
+
+    @FXML
+    private void movie2ShowDetail(MouseEvent event) {
+        Movie movie = movies.get(Movie2Index);
+        
+        JFXDialogLayout layaout = new JFXDialogLayout();
+        layaout.setHeading(new Text(movie.getTitle()));
+        final ImageView image = new ImageView(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+        image.setFitHeight(220);
+        image.setFitWidth(160);
+        final Text text = new Text(movie.getDetail());
+        text.prefWidth(400);
+        text.maxWidth(400);
+        HBox box = new HBox(image, text);
+        
+        layaout.setBody(box);        
+
+        JFXDialog dialog = new JFXDialog(dialogPane, layaout, JFXDialog.DialogTransition.CENTER);
+        
+        JFXButton close = new JFXButton("Fermer");
+        close.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        
+        layaout.setActions(close);
+        dialog.show();
+    }
+
+    @FXML
+    private void Movie3ShowDetail(MouseEvent event) {
+        Movie movie = movies.get(Movie3Index);
+        
+        JFXDialogLayout layaout = new JFXDialogLayout();
+        layaout.setHeading(new Text(movie.getTitle()));
+        final ImageView image = new ImageView(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+        image.setFitHeight(220);
+        image.setFitWidth(160);
+        final Text text = new Text(movie.getDetail());
+        text.prefWidth(400);
+        text.maxWidth(400);
+        HBox box = new HBox(image, text);
+        layaout.setBody(box);
+        
+        JFXDialog dialog = new JFXDialog(dialogPane, layaout, JFXDialog.DialogTransition.CENTER);
+        
+        JFXButton close = new JFXButton("Fermer");
+        close.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        
+        layaout.setActions(close);
+        dialog.show();
     }
 
     private void fetchInitialData() {
@@ -247,7 +345,7 @@ public class FXMLController implements Initializable {
                     movie1Note.setRating(0);
 
                 }
-                
+
                 movie1Favori.setSelected(favoryService.gteAllFavory().contains(movie));
 
             } catch (IndexOutOfBoundsException e) {
