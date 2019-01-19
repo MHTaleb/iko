@@ -221,6 +221,8 @@ public class FXMLController implements Initializable {
         Movie movie = movies.get(Movie1Index);
         
         JFXDialogLayout layaout = new JFXDialogLayout();
+        layaout.maxWidth(500);
+        layaout.maxHeight(400);
         layaout.setHeading(new Text(movie.getTitle()));
         final ImageView image = new ImageView(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
         image.setFitHeight(220);
@@ -251,6 +253,8 @@ public class FXMLController implements Initializable {
         Movie movie = movies.get(Movie2Index);
         
         JFXDialogLayout layaout = new JFXDialogLayout();
+        layaout.maxWidth(500);
+        layaout.maxHeight(400);
         layaout.setHeading(new Text(movie.getTitle()));
         final ImageView image = new ImageView(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
         image.setFitHeight(220);
@@ -281,6 +285,8 @@ public class FXMLController implements Initializable {
         Movie movie = movies.get(Movie3Index);
         
         JFXDialogLayout layaout = new JFXDialogLayout();
+        layaout.maxWidth(500);
+        layaout.maxHeight(400);
         layaout.setHeading(new Text(movie.getTitle()));
         final ImageView image = new ImageView(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
         image.setFitHeight(220);

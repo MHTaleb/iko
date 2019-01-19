@@ -57,6 +57,9 @@
                         </ImageView>
                         <JFXPasswordField fx:id="password" labelFloat="true" promptText="Password" style="-fx-fill: #fff; -fx-text-fill: white;" styleClass="white-prompt" unFocusColor="WHITE" />
                      </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
                   </HBox>
                   <HBox alignment="CENTER" spacing="33.0">
                      <children>
