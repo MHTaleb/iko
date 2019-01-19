@@ -28,6 +28,9 @@ public class MainApp extends Application {
         stage.setTitle("JavaFX and Maven");
         stage.setResizable(false);
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            System.exit(0);
+        });
         stage.show();
     }
 

@@ -81,6 +81,9 @@ public class LoginController implements Initializable {
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");
             stage.setScene(scene);
+            stage.setOnCloseRequest(eventClose -> {
+                System.exit(0);
+            });
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

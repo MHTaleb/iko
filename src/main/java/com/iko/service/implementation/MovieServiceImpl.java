@@ -29,8 +29,33 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> getAllMoviesByType(String typeName) {
 
+        System.out.println("type name is "+typeName);
+        MovieType type ;
+        
+        switch(typeName.toLowerCase()){
+            case "action":
+                type = MovieType.ACTION;
+                break;
+            case "comedy":
+                type = MovieType.COMEDY;
+                break;
+            case "aventure":
+                type = MovieType.ADVENTUR;
+                break;
+            case "romance":
+                type = MovieType.ROMANCE;
+                break;
+            case "thriller":
+                type = MovieType.THRILLER;
+                break;
+            case "horreur":
+                type = MovieType.HOROR;
+                break;
+            default: return mjc.findMovieEntities();
+        }
+        
         Predicate<? super Movie> typeNamePredicate = movie -> {
-            return movie.getType().name().toLowerCase().equals(typeName.toLowerCase());
+            return movie.getType().equals(type);
         };
 
         List<Movie> movies = new ArrayList<>();
@@ -62,7 +87,7 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getAllMoviesByTitle(String title) {
 
         Predicate<? super Movie> typeNamePredicate = movie -> {
-            return movie.getTitle().toLowerCase().equals(title);
+            return movie.getTitle().toLowerCase().contains(title);
         };
 
         List<Movie> movies = new ArrayList<>();
@@ -79,7 +104,7 @@ public class MovieServiceImpl implements MovieService {
         List<Movie> movies = new ArrayList();
         Predicate<? super Movie> advancedSearchPredicate = movie -> {
             return movie.getTitle().toLowerCase().contains(title.toLowerCase()) &&
-                    movie.getType().name().toLowerCase().equals(typeName) && 
+                    movie.getType().name().toLowerCase().contains(typeName) && 
                     checkKeyWords(movie, keyWords);
         };
         mjc.findMovieEntities().stream().filter(advancedSearchPredicate).forEach(movies::add);

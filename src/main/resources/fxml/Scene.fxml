@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" prefHeight="419.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iko.iko.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="443.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iko.iko.FXMLController">
      <children>
       <VBox layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -56,6 +56,11 @@
                <children>
                   <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="361.0" prefWidth="110.0" spacing="13.0" style="-fx-background-color: #006666;">
                      <children>
+                        <JFXButton onAction="#movieFilterEvent" text="Tout" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton onAction="#movieFilterEvent" text="Action" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -77,6 +82,11 @@
                            </font>
                         </JFXButton>
                         <JFXButton onAction="#movieFilterEvent" text="Thriller" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#movieFilterEvent" text="Horreur" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -108,7 +118,7 @@
                               <JFXButton onAction="#searchEvent" text="Rechercher" />
                            </children>
                         </HBox>
-                        <HBox alignment="TOP_CENTER" spacing="50.0">
+                        <HBox alignment="TOP_CENTER" prefHeight="307.0" prefWidth="660.0" spacing="50.0" VBox.vgrow="ALWAYS">
                            <children>
                               <VBox fx:id="movie1Panel" alignment="TOP_CENTER" prefHeight="198.0" prefWidth="143.0" spacing="5.0" style="-fx-border-color: #3335;">
                                  <children>
@@ -166,7 +176,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox prefHeight="25.0" prefWidth="603.0">
+                        <HBox prefHeight="26.0" prefWidth="660.0">
                            <children>
                               <HBox>
                                  <children>

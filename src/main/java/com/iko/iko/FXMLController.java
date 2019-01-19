@@ -85,29 +85,50 @@ public class FXMLController implements Initializable {
     @FXML
     private void movieFilterEvent(ActionEvent event) {
         JFXButton filterButton = (JFXButton) event.getSource();
+        String filter = filterButton.getText();
+        if (!filter.isEmpty()) {
+            List<Movie> allMoviesByTitle = movieService.getAllMoviesByType(filter);
+            movies.clear();
+            movies.addAll(allMoviesByTitle);
+            Movie1Index = 0;
+            Movie2Index = 1;
+            Movie3Index = 2;
+            showMovies(Movie1Index, Movie2Index, Movie3Index);
+        }
 
     }
 
     @FXML
     private void searchEvent(ActionEvent event) {
+        String searchValue = searchField.getText();
+        if (!searchValue.isEmpty()) {
+            List<Movie> allMoviesByTitle = movieService.getAllMoviesByTitle(searchValue);
+            movies.clear();
+            movies.addAll(allMoviesByTitle);
+            Movie1Index = 0;
+            Movie2Index = 1;
+            Movie3Index = 2;
+            showMovies(Movie1Index, Movie2Index, Movie3Index);
+        }
+
     }
 
     @FXML
     private void showPrevious(ActionEvent event) {
-        if (Movie1Index>0) {
-            Movie1Index -=1;
-            Movie2Index -=1;
-            Movie3Index -=1;
+        if (Movie1Index > 0) {
+            Movie1Index -= 1;
+            Movie2Index -= 1;
+            Movie3Index -= 1;
             showMovies(Movie1Index, Movie2Index, Movie3Index);
         }
     }
 
     @FXML
     private void showNext(ActionEvent event) {
-        if (Movie3Index<movies.size()-1) {
-            Movie3Index+=1;
-            Movie2Index+=1;
-            Movie1Index+=1;
+        if (Movie3Index < movies.size() - 1) {
+            Movie3Index += 1;
+            Movie2Index += 1;
+            Movie1Index += 1;
             showMovies(Movie1Index, Movie2Index, Movie3Index);
         }
     }
@@ -119,12 +140,12 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateMovie1Note(MouseEvent event) {
         try {
-            System.out.println("movie panel 1 index is "+Movie1Index);
+            System.out.println("movie panel 1 index is " + Movie1Index);
             final double rating = movie1Note.getRating();
             double updateNote = movieNoteService.updateNote(movies.get(Movie1Index).getId(), rating);
             movie1Note.setRating(updateNote);
             getData();
-            System.out.println("event end with note "+updateNote+" current input ratting "+rating);
+            System.out.println("event end with note " + updateNote + " current input ratting " + rating);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,7 +154,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateMovie2Note(MouseEvent event) {
         try {
-            System.out.println("movie panel 2 index is "+Movie2Index);
+            System.out.println("movie panel 2 index is " + Movie2Index);
             final double rating = movie2Note.getRating();
             double updateNote = movieNoteService.updateNote(movies.get(Movie2Index).getId(), rating);
             movie2Note.setRating(updateNote);
@@ -147,7 +168,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void updateMovie3Note(MouseEvent event) {
         try {
-            System.out.println("movie panel 3 index is "+Movie3Index);
+            System.out.println("movie panel 3 index is " + Movie3Index);
             final double rating = movie3Note.getRating();
             double updateNote = movieNoteService.updateNote(movies.get(Movie3Index).getId(), rating);
             movie3Note.setRating(updateNote);
@@ -178,53 +199,72 @@ public class FXMLController implements Initializable {
         try {
             double somme;
             int size;
+            Movie movie;
 
-            somme = 0;
-            size = 0;
-            Movie movie = movies.get(Movie1IndexParam);
-            movie1Title.setText(movie.getTitle());
-            movie1Image.setImage(new Image("file:///C:/Films/" + movie.getTitle() + ".jpg"));
-            if (!movie.getNotes().isEmpty()) {
-                for (Note note : movie.getNotes()) {
-                    somme += note.getValeur();
+            try {
+                movie1Panel.setVisible(true);
+                somme = 0;
+                size = 0;
+                movie = movies.get(Movie1IndexParam);
+                movie1Title.setText(movie.getTitle());
+                movie1Image.setImage(new Image("file:///C:/Films/" + movie.getTitle() + ".jpg"));
+                if (!movie.getNotes().isEmpty()) {
+                    for (Note note : movie.getNotes()) {
+                        somme += note.getValeur();
+                    }
+                    size = movie.getNotes().size();
+                    movie1Note.setRating(somme / size);
+                } else {
+                    movie1Note.setRating(0);
+
                 }
-                size = movie.getNotes().size();
-                movie1Note.setRating(somme / size);
-            }else{
-                movie1Note.setRating(0);
-                
+
+            } catch (IndexOutOfBoundsException e) {
+                movie1Panel.setVisible(false);
             }
 
-            somme = 0;
-            size = 0;
-            movie = movies.get(Movie2IndexParam);
-            movie2Title.setText(movie.getTitle());
-            movie2Image.setImage(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
-            if (!movie.getNotes().isEmpty()) {
-                for (Note note : movie.getNotes()) {
-                    somme += note.getValeur();
+            try {
+
+                movie2Panel.setVisible(true);
+                somme = 0;
+                size = 0;
+                movie = movies.get(Movie2IndexParam);
+                movie2Title.setText(movie.getTitle());
+                movie2Image.setImage(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+                if (!movie.getNotes().isEmpty()) {
+                    for (Note note : movie.getNotes()) {
+                        somme += note.getValeur();
+                    }
+                    size = movie.getNotes().size();
+                    movie2Note.setRating(somme / size);
+                } else {
+                    movie2Note.setRating(0);
+
                 }
-                size = movie.getNotes().size();
-                movie2Note.setRating(somme / size);
-            }else{
-                movie2Note.setRating(0);
-                
+            } catch (IndexOutOfBoundsException e) {
+                movie2Panel.setVisible(false);
             }
 
-            somme = 0;
-            size = 0;
-            movie = movies.get(Movie3IndexParam);
-            movie3Title.setText(movie.getTitle());
-            movie3Image.setImage(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
-            if (!movie.getNotes().isEmpty()) {
-                for (Note note : movie.getNotes()) {
-                    somme += note.getValeur();
+            try {
+                movie3Panel.setVisible(true);
+                somme = 0;
+                size = 0;
+                movie = movies.get(Movie3IndexParam);
+                movie3Title.setText(movie.getTitle());
+                movie3Image.setImage(new Image("file:///c:/Films/" + movie.getTitle() + ".jpg"));
+                if (!movie.getNotes().isEmpty()) {
+                    for (Note note : movie.getNotes()) {
+                        somme += note.getValeur();
+                    }
+                    size = movie.getNotes().size();
+                    movie3Note.setRating(somme / size);
+                } else {
+                    movie3Note.setRating(0);
+
                 }
-                size = movie.getNotes().size();
-                movie3Note.setRating(somme / size);
-            }else{
-                movie3Note.setRating(0);
                 
+            } catch (IndexOutOfBoundsException e) {
+                movie3Panel.setVisible(false);
             }
 
         } catch (Exception e) {
